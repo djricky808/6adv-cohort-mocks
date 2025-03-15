@@ -9,41 +9,63 @@
 // # Input: numbers = [1, 3, 4, 5, 7], target = 8
 // # Output: [2, 4]
 
-function twoSum(numbers: number[], target: number): number[] | null | void {
-  let left: number = 0;
-  let right: number = numbers.length - 1;
-  function findTwoSum(
-    numbers: number[],
-    left: number,
-    right: number,
-    target: number
-  ): number[] | null | void {
-    console.log(
-      "indices L/R:",
-      left,
-      right,
-      "numbers:",
-      numbers[left],
-      numbers[right]
-    );
-    if (left > right || numbers.length < 2) {
-      return null;
-    }
+// function twoSum(numbers: number[], target: number): number[] | null | void {
+//   let left: number = 0;
+//   let right: number = numbers.length - 1;
+//   function findTwoSum(
+//     numbers: number[],
+//     left: number,
+//     right: number,
+//     target: number
+//   ): number[] | null | void {
+//     console.log(
+//       "indices L/R:",
+//       left,
+//       right,
+//       "numbers:",
+//       numbers[left],
+//       numbers[right]
+//     );
+//     if (left > right || numbers.length < 2) {
+//       return null;
+//     }
+//     if (numbers[left] + numbers[right] === target) {
+//       console.log("The numbers match the target!");
+//       return [left + 1, right + 1];
+//     }
+//     if (numbers[left] + numbers[right] > target) {
+//       return findTwoSum(numbers, left, right - 1, target);
+//     }
+//     if (numbers[left] + numbers[right] < target) {
+//       return findTwoSum(numbers, left + 1, right, target);
+//     }
+//   }
+//   return findTwoSum(numbers, left, right, target);
+// }
+
+//Using an iterative approach
+
+function twoSum(numbers: number[], target: number): number[] | null {
+  if (numbers.length <= 1) {
+    return null;
+  }
+  let right = numbers.length - 1;
+  let left = 0;
+  while (left < right) {
+    console.log(numbers[left], numbers[right]);
     if (numbers[left] + numbers[right] === target) {
-      console.log("The numbers match the target!");
+      console.log("Target reached");
       return [left + 1, right + 1];
-    }
-    if (numbers[left] + numbers[right] > target) {
-      return findTwoSum(numbers, left, right - 1, target);
-    }
-    if (numbers[left] + numbers[right] < target) {
-      return findTwoSum(numbers, left + 1, right, target);
+    } else if (numbers[left] + numbers[right] > target) {
+      right--;
+    } else {
+      left++;
     }
   }
-  return findTwoSum(numbers, left, right, target);
+  return null;
 }
 
-// console.log(twoSum([2], 9));
+console.log(twoSum([2, 7, 8, 10], 9));
 
 // # Longest Substring Without Repeating Characters
 // # Given a string, find the length of the longest substring without repeating characters using the sliding window technique.
